@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../features/todoSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../features/todoSlice";
 
 const Home = () => {
-  const [todo, setTodo] = useState('');
+  const [todo, setTodo] = useState("");
   const todos = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
     dispatch(addTodo(todo));
-    setTodo('');
+    setTodo("");
   };
 
   return (
@@ -31,7 +31,9 @@ const Home = () => {
       </div>
       <ul className="list-disc pl-6">
         {todos.map((todo, index) => (
-          <li key={index} className="mb-2">{todo}</li>
+          <li key={index} className="mb-2">
+            {todo}
+          </li>
         ))}
       </ul>
     </div>

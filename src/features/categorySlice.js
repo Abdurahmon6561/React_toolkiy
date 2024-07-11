@@ -1,28 +1,33 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchCategories = createAsyncThunk('category/fetchCategories', async () => {
-  const response = await axios.get('https://ecommerce-backend-fawn-eight.vercel.app/api/categories');
-  return response.data;
-});
+export const fetchCategories = createAsyncThunk(
+  "category/fetchCategories",
+  async () => {
+    const response = await axios.get(
+      "https://ecommerce-backend-fawn-eight.vercel.app/api/categories"
+    );
+    return response.data;
+  }
+);
 
 const categorySlice = createSlice({
-  name: 'category',
+  name: "category",
   initialState: {
     categories: [],
-    status: 'idle',
+    status: "idle",
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.categories = action.payload;
       })
       .addCase(fetchCategories.rejected, (state) => {
-        state.status = 'failed';
+        state.status = "failed";
       });
   },
 });
